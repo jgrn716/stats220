@@ -8,4 +8,4 @@ A little about me:
 - I am taking STATS 220 because I am considering research pathways and believe coding is becoming, if not already, an essential skill.
 - I am interested in learning about how to communicate research in effective, digestible ways that don't mislead the public.
 
-A meme that captures how I currently feel about my university studies is ![](https://tenor.com/en-NZ/view/planning-buzz-lightyear-woody-encourage-toy-story-gif-14484239)
+A meme that captures how I currently feel about my university studies is ![](https://media1.tenor.com/m/RLyfEhRfPbAAAAAd/planning-buzz-lightyear.gif)
