@@ -1,0 +1,359 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+library(tidyverse)
+
+# Create data frame from the published CSV file
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSdCw6VAWohCjomqMRjgfmZs8T7Uq1Dfg6rj761s33p6x8UNFaTP-WXVEvn9983u4h3ckpSdEBn0Ayu/pub?gid=126025250&single=true&output=csv")
+
+# Create a new data frame with renamed variables/columns
+latest_data <- logged_data %>%
+  select(-1, -2) %>%
+  rename(employment_status = 1,
+         age_group = 2,
+         freq_days = 3,
+         estimated_min = 4,
+         activity_type = 5,
+         urgency_rating = 6)
+
+# Calculate total time on OLA (Offline Leisure Activity) per respondent my element-wise vector multiplication
+# BUT FIRST: convert categorical freq_days response bands into numerical midpoint equivalents 
+latest_data <- latest_data %>%
+  mutate(
+    freq_numeric = case_when(
+      freq_days == "0 days." ~ 0,
+      freq_days == "1-2 days." ~ 1.5,
+      freq_days == "3-4 days." ~ 3.5,
+      freq_days == "5-6 days." ~ 5.5,
+      freq_days == "7 days." ~ 7
+    ) 
+  )
+
+latest_data <- latest_data %>%
+  mutate(
+    weekly_min = estimated_min * freq_numeric
+  )
+
+# VARIABLES OF INTEREST (VOI) & auto remove NAs just in case
+# 1 - find average median time spent on OLA (to avoid outlier effects)
+median_time_spent <- latest_data$weekly_min %>%
+  median(na.rm = TRUE)
+
+# 2 - find average median frequency of engagement in OLA (to avoid outlier effects)
+median_frequency <- latest_data$freq_numeric %>%
+  median(na.rm = TRUE)
+
+# 3 - find most common response-band for urgency_rating
+mode_urgency <- which.max(table(latest_data$urgency_rating))
+
+# 4 - find most popular activity type
+# Remove space at the start and end of each row in activity_type column for ease
+mode_activity <- latest_data %>%
+  separate_rows(activity_type, sep = ",") %>%
+  mutate(activity_type = str_trim(activity_type)) %>%
+  count(activity_type, sort = TRUE)
+
+# NUMBER OF RESPONSES/POPULATION
+population <- nrow(latest_data)
+
+
+# MOST POPULAR OLAs RANKED converted to single vector without n
+ranked_act <- c(mode_activity$activity_type)
+
+
+
+# PLOT SECTION
+
+# Plot employment status vs. avg_weekly_min
+# Summarise data first for AVG weekly_min by employment_status
+employment_summary <- latest_data %>%
+  group_by(employment_status) %>%
+  summarise(avg_weekly_min = median(weekly_min, na.rm = TRUE)) # Used median calculation because of huge right-skewing outliers
+
+weekly_by_status <- employment_summary %>%
+  ggplot(aes(x = employment_status,
+             y = avg_weekly_min)) +
+  geom_bar(stat = "identity") + # Lets my bar graph use my specified y = avg_weekly_min
+  labs(title = "Median Weekly OLA Time by Employment Status",
+       x = "Employment Status",
+       y = "Median Weekly OLA Time (minutes)",
+       caption = "Source: Offline Leisure Activity Habits of New Zealanders: A Survey")
+
+# Plot raw weekly OLA time by urgency ratings to observe correlative relationship
+weekly_by_urgency <- latest_data %>%
+  ggplot() +
+  geom_point(aes(x = urgency_rating,
+                 y = weekly_min)) +
+  labs(title = "Raw Data on Weekly OLA Time by Urgency Ratings",
+       x = "Urgency Yating (1-5)",
+       y = "Weekly OLA Time (minutes)",
+       caption = "Source: Offline Leisure Activity Habits of New Zealanders: A Survey")
+
+# Plot count (i.e., no. of respondents that selected for an urgency rating), by employment status
+# Summarise data first to create one bar per urgency rating
+urgency_count_summary <- latest_data %>%
+  group_by(urgency_rating, employment_status) %>%
+  summarise(count = n(), .groups = 'drop')
+
+urgency_by_employment <- urgency_count_summary %>%
+  ggplot() +
+  geom_bar(aes(x = urgency_rating,
+               fill = employment_status)) +
+  labs(title = "Reported Urgency Ratings by Respondents According to Employment Status",
+       x = "Urgency rating (1 - 5 scale in ascending order of urgency)",
+       y = "Count of Responses",
+       caption = "Offline Leisure Activity Habits of New Zealanders: A Survey")
+
+```
+
+```{css}
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Momo+Trust+Display&family=Momo+Trust+Sans:wght@200..800&display=swap');
+
+h1{
+ font-family: "Bungee", sans-serif;
+ font-size: 5rem;
+ color: #FFD700;
+ text-shadow: 2px 2px 0 black;
+}
+
+h2 {
+  font-family: "Bungee", sans-serif;
+  font-size: 3rem;
+  color: #FFD700;
+  text-shadow: 2px 2px 0 black;
+    }
+    
+h3 {
+  font-family: "Bungee", sans-serif;
+  color: #FFD700;
+  text-shadow: 2px 2px 0 black;
+  margin-top: 1em;
+  margin-bottom: 0.2em;
+    }
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Momo+Trust+Display&display=swap');
+
+p, li {
+  font-family: "Momo Trust Sans", sans-serif;
+  font-weight: 300;  /* Light weight */
+}
+
+img {
+  border: 3px solid #000000 !important;
+  border-radius: 12px;
+  display: block;
+  max-width: 100%;
+}
+
+.section-border {
+  border: 3px solid #000000 !important;
+  border-radius: 12px;
+  padding: 25px;
+  margin: 20px 0;
+  background: #f9f9f9;
+}
+
+```
+
+## Introduction
+
+<div class="section-border">
+### Context
+
+Since COVID-19 drove mankind into social & physical isolation, the world just hasn't been the same. We witnessed massive, sweeping declines in the physical, and mental well-being of populations across the globe. Then, meteoric rises in the rates of depression, and anti-social behaviours of our most vulnerable, made us painfully aware of the irreplaceable value of real, physical, human interaction. But now, with the dawn of Artificial Intelligence, many people are finding themselves struggling once again to pry themselves from their screen-addictions - even when they want to. But, not all hope is lost! Recent observations argue that individual and collective autonomy still lives! 
+
+In what could be called a <i> 'corrective turn' </i> toward offline life, emerging trends indicate growing sentiment in the desire to <i>"quit social media"</i> and re-connect with the physical world. Take for example the explosions in popularity of hobbies like running, bouldering, plant collection, dancing, matcha making, and paperback reading to name a few. A recent cultural icon embodies these cultural shifts well: the phenomenon of the <i>"performative man"</i> archetype... 
+
+<img src="How-to-identify-performative-male.jpg" alt="An infographic reading, &quot;How to identify a performative man&quot;, alongside a picture of a man in vintage 'preppy' clothes, wired headphones, a physical book on &quot;feminist&quot; literature in one hand, and a mug of matcha in his other hand." style="width: 500px; height: auto; border: 3px solid black;">
+
+Importantly, the current body of peer-reviewed academic research seems to support these shifts. Studies suggest that offline leisure activities, such as the earlier, provide greater correlative benefits to our well-being than online/screen-reliant alternatives. But, how are Kiwis positioned in all this? They say that <i>"actions speak louder than words"</i>; so, what do our (Kiwi/New Zealander) behaviours say about our offline engagement?
+<br><br><br>
+</div>
+
+<div class="section-border">
+### Focus:
+
+This report will investigate the offline leisure activity (OLA) habits of Kiwis, from a dynamic sample size of `r population`. Specifically, we collected data on the average amount of time respondents spent on OLA over the period of a week. For the purpose of gathering further context, we also collected data on what kind of OLA the respondents' engage in, as well as their employment status and their sense of urgency (how rushed people self-reportedly feel when engaging in OLA). The data used in this report is derived from a [6-item, open-access survey](https://forms.gle/CHCuTLF6SAigDJnL6) for an undergraduate research assignment.
+<br><br><br>
+</div>
+
+<div class="section-border">
+### Guidelines:
+
+In the design of my data collection methods, particular attention was paid to <i>"Guideline 4: Use validation rules for responses"</i>. Proper adherance to this guideline allows for the collection of <i>"clean"</i> data, such that bugs and error codes can be avoided due to the presence of invalid, <i>"NA"</i> (Not Available) values in the data gathered. Clean data thereby gives way to a more seamless process in the visualisation and analysis of data to gather valid, valuable insights. Response validation guidelines were utlisied by requiring that all questions in the survey are answered by the respondent in order to submit a response, and by requiring a numeric short answer response (between values of 0 and 1440) to "Question 4", where the use of special characters (i.e., ".", ",", "</>", etc.) is also restricted to avoid floating point and NA values. The value restriction (between 0 and 1440) additionally allows for a full spectrum of possible responses - for individuals that do not engage in OLA at all, as well as the impractical (but theoretically applicable) possibility of engaging in 24 hours of OLA engagement in a single day. 
+Unfortunately, whilst response validation helps in gathering clean data, it also risks bias in the responses, and harm to respondents. For example, the presence and wording of the question risks that respondents may feel pressured to input an inaccurate value, to please the researcher and/or align themselves with perceived social norms (i.e., social desirability bias). Unfortunately, due to time constraints, I was unable to launch a pilot survey and failed to recognise that my wording in question 4 presumes that the respondent <b><i>does</i></b> engage in OLA at all: <br>
+
+<img src="Question-4-screenshot.png" alt="A screenshot of a question in the survey that reads: %quot;4. On average, how many minutes per day do you spend on offline leisure activities outside of work/school?
+(Please do not include special characters and punctuation.)&quot;" style="width: 500px; height: auto;">
+<br><br><br>
+</div>
+
+<div class="section-border">
+### How the data collected helped me learn something from analysing it:
+
+In analysing the data collected for this project, I learned the following valuble lessons:<br>
+
+1. It is very difficult, if not impossible, to design an entirely <i>foolproof</i> survey that completely escapes bias (from either the researchers', or the researchees' end) and simultaenously allows for the collection of <i>"clean and tidy"</i> data. To some degree, we have to welcome the existence of bias and use it to lean into the inherent contextual nature of a given sample size (of a population).
+
+2. There is a fine balance in narrowing the options provided in closed answer questions to achieve specificity/accuracy, and accounting for the wide spectrum of possible experiences.
+
+3. A great wealth of insight can be synthesized from even a <i>small</i> subset of data (i.e., responses from a 6-question survey), to generate inummerable hypotheses. In other words, even studies with small populations can be useful for research so long as we are aware of, and communicate the limit to generalisability well.
+
+<b>Note:</b> <i>Both the form designed and data collection for this project were completed by me.</i> \newline
+<br><br><br>
+</div> 
+
+
+```{r}
+# AVERAGE TIME SPENT ON OLAs (median to avoid outlier effects)
+med_min <- median.default(latest_data$estimated_min)
+
+# MOST POPULAR OLAs RANKED converted to single vector without n
+ranked_act <- c(mode_activity$activity_type)
+```
+
+## Dynamic Report
+
+<div class="section-border">
+Link to GitHub Pages published dynamic report:
+[](https://)
+</div>
+
+<div class="section-border">
+### Interesting Insights: 
+<b><i>How Much Time Does the Average Kiwi Spend on OLAs?</i></b>
+
+Amongst the `r population` respondents, the average (<i>median</i>) time spent per week on OLA was `r median_time_spent` minutes; or `r median_time_spent/60` hours. This means that the average Kiwi, according to my small sample, typically spends `r med_min` minutes; or `r med_min/60` hours on a given day that they engage in offline leisure activities. 
+
+![An animated image of a popular character, "Crayon Shin-chan", dancing.](https://tenor.com/en-NZ/view/shinchan-dance-shinchan-짱구-짱구춤-dance-gif-25219440.gif) 
+<br><br><br>
+
+
+<b><i>Top Five OLA Hobbies:</i></b>
+
+According to my survey, the <i>top five</i> OLA hobbies amongst Kiwis are: <br>
+1. `r c(ranked_act[1])` <br>
+2. `r c(ranked_act[2])` <br>
+3. `r c(ranked_act[3])` <br>
+4. `r c(ranked_act[4])` <br>
+5. `r c(ranked_act[5])` 
+<br><br><br>
+
+
+### Plotted Visualisations
+<br>
+```{r weekly-by-status-plot, fig.width=14, fig.height=7, out.width="67%", fig.cap="Figure 1: A bar graph depicting the median amount of time (minutes) respondents spent on OLAs.", echo=FALSE}
+
+# Summarise data first for AVG weekly_min by employment_status
+employment_summary <- latest_data %>%
+  group_by(employment_status) %>%
+  summarise(avg_weekly_min = median(weekly_min, na.rm = TRUE)) # Used median calculation because of huge right-skewing outliers
+
+# Plot employment status vs. avg_weekly_min
+ggplot(employment_summary, aes(x = employment_status,
+                               y = avg_weekly_min)) +
+  geom_bar(stat = "identity") + # Lets my bar graph use my specified y = avg_weekly_min
+  labs(title = "Median Weekly OLA Time by Employment Status",
+       x = "Employment Status",
+       y = "Median Weekly OLA Time (minutes)",
+       caption = "Source: Offline Leisure Activity Habits of New Zealanders: A Survey")
+```
+<i>Results:</i> Respondents who selected for the "Game developer, casual warehouse assistant", and "Part-time employed" statuses engaged in OLAs significantly more than their peers (i.e., "Full-time employed", "Unemployed", and "Freelancer"). It is important to consider that, due to the small sample size (<i>n</i> = 20), there is a very assymmetric distribution of employment statuses skewingly strongly towards "Full-time employed" responses. Additionally, significant time constraints for this project resulted in a very short interval between data collection and analysis. This provides the added risk of bias in the types of individuals who responded to the survey.
+<br><br><br>
+
+
+```{r weekly-by-urgency-plot, fig.width=14, fig.height=7, out.width="67%", fig.cap="Figure 2: A scatterplot depicting the distribution of raw OLA time allocation values (minutes per week), with respect to urgency rating response-bands.", echo=FALSE}
+
+# Plot raw weekly OLA time by urgency ratings to observe correlative relationship
+ggplot(latest_data) +
+  geom_point(aes(x = urgency_rating,
+                 y = weekly_min)) +
+  labs(title = "Raw Data on Weekly OLA Time by Urgency Ratings",
+       x = "Urgency Rating (1-5)",
+       y = "Weekly OLA Time (minutes)",
+       caption = "Source: Offline Leisure Activity Habits of New Zealanders: A Survey")
+```
+<i>Results:</i> Urgency rating responses appear to cluster around the values of "3" and "4", out of the 5-point scale. This indicates that most Kiwis (from this population), feel moderate to moderately-high levels of urgency when engaging in OLAs. If these effects do extend to wider populations, it is of interest whether the current geopolitical, and socioeconomic climate contributed to these results, versus modern cultural shifts in lifestyle pressures, versus a combination of both - or an entirely other factor. Additionally, not accounting for outliers, there appears to be a generally inversely proportional correlation between weekly OLA time and urgency rating. That is, the higher the respondents rated their feelings of urgency - whilst engaging in OLAs - the less time they engaged in OLAs throughout the week. Once again, it is important to consider that due to the small sample size and asymmetric distribution of employment status responses, this correlative relationship seems to disappear. 
+<br><br><br>
+
+
+```{r urgency-by-employment-plot, fig.width=14, fig.height=7, out.width="67%", fig.cap="Figure 3: A bar graph depicting the number of responses with respect to urgency rating response-bands, for each employment status category.", echo=FALSE}
+
+# Summarise data first to create one bar per urgency rating
+urgency_count_summary <- latest_data %>%
+  group_by(urgency_rating, employment_status) %>%
+  summarise(count = n(), .groups = 'drop')
+
+# Plot count (i.e., no. of respondents that selected for an urgency rating), by employment status
+ggplot(urgency_count_summary) +
+  geom_bar(aes(x = urgency_rating,
+               y = count,
+               fill = employment_status),
+           stat = "identity") +
+  labs(title = "Reported Urgency Ratings by Respondents According to Employment Status",
+       x = "Urgency rating (1 - 5 scale in ascending order of urgency)",
+       y = "Count of Responses",
+       caption = "Offline Leisure Activity Habits of New Zealanders: A Survey")
+```
+<i>Results:</i> Interestingly, respondents who classified themselves as either "Full-time employed" or "Part-time employed" are the most well-distributed across urgency rating response-bands. On the other hand, the urgency ratings of the respondents classified as "Freelancer" and "Game developer, casual warehouse assistant" are congruent with the prior result indicating an average tendency to score between "3" and "4" for urgency ratings. Meanwhile, the respondent classified as "Unemployed" selected for the lowest urgency rating (i.e., "1").  These results of the latter three cohorts however, have limited power and generalisability as all three belonged to a sample size of <i>n</i> = 1 each. Being that the "Full-time employed" and "Part-time employed" cohorts were the largest contributes to the sample size of this study,it would be inappropriate to discuss their effect on this pattern. 
+<br><br><br>
+</div> 
+
+
+
+## Creativity
+
+<div class="section-border">
+Some of the ways this project demonstrates creativity are listed in the following ways:
+
+1. Two different ways to display images were used in my report to practice fluency across coding languages (i.e., inline HTML tags as well as standard Markdown syntax).
+
+2. I utilised CSS to customize the appearance of my dynamic report. Different fonts were imported for the headers and body respectively. Additionally, the colour schemes of the headers were specified to match the theme of the first image (for design coherence). Additionally, a combination of inline HTML code, and an internal CSS chunk were used to add borders around images and plots. This formatting was then extended to more clearly define the different sections of my dynamic report.
+
+3. I included an introduction that provides deeper context, than was required for this project, into the interests and purpose behind this report (i.e., in the opening paragraphs for my introduction).
+
+4. Different header levels were used to separate sections of the report for readablity, and inline italic and bold HTML tags were also used to emphasise key concepts I wanted the reader to pay attention to.
+
+5. A wide range of variables were investigated in this report to generate multiple insights. 
+
+6. Multiple plots were generated using the ggplot function (i.e., 2 bar graphs, 1 scatter plot) to communicate interesting key findings.
+
+7. I manipulated my data frame using the mutate function to generate numerical calculations between two different classes of data values (numeric and character strings). Specifically I converted the response bands in my "freq_days" column to numeric estimates, and multiplied them with corresponding values in my "estimated_min" column to infer the amount of time respondents' may spend throughout a whole week (rather than per day as was recorded).
+
+8. I devised a means to rank OLAs, by response popularity, using code from a column that contained multiple values in each row (vector). I also necessarily converted these values into a uniform string format. The latter was particularly difficult when I noticed that the same OLA type (i.e., "Dancing." vs. " Dancing." was counted as different values (in their own row with their own <i>n</i> count) due to the presence of inconsistent spaces when responses were ordered chronologically by the respondents' selections.\newline
+<br><br><br>
+</div> 
+
+<div class="section-border">
+## Learning Reflection
+
+### 1. One important idea learned form Module 2:
+An important idea that I learned from <b>Module 2</b> was the concept of data governance through the <i>"FAIR"</i> and <i>CARE</i> principles. Of particular issue is the lesson that data can represent, and thereby impact the living experience (of human participants, and animal subjects). Additionally, I have learnt that the use of a pilot study is a great way to expose flaws in the design of my data collection and data analysis methods. The pilot study can reveal important biases, and possible ethical dilemmas concerning <i>"FAIR"</i> and <i>CARE</i> principles of data governance. It is also a great way to gather feedback on current or future study designs.
+
+### 2. Things related to data technologies that I want to explore further:
+I would love to further explore the creation of interactive elements such as progressive revealing infographics, for their propensity to capture human attention. The stories we explored in pudding.cool are great examples of data technologies that pique my curiosity.
+
+### 3. How I aim to develop my group work skills (1-2 sentences):
+Going forward, I aim to develop my group work skills by making a greater effort to attend the open drop-in sessions post-mid-semester break. There, I hope I can interact with other cohort members that share similar interests in Psychological research, or simply to learn from more skilled peers. I intend to reduce my barriers to attending the sessions by ensuring I am better caught up with course content over this study break.\newline
+<br><br><br>
+</div> 
+
+
+## Appendix
+
+<div class="section-border">
+```{r file='exploration.R', eval=FALSE, echo=TRUE}
+
+```
+```{r file='dynamic_report.Rmd', eval=FALSE, echo=TRUE}
+
+```
+</div>
