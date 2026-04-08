@@ -58,13 +58,13 @@ mode_activity <- latest_data %>%
   mutate(activity_type = str_trim(activity_type)) %>%
   count(activity_type, sort = TRUE)
 
+
 # NUMBER OF RESPONSES/POPULATION
 population <- nrow(latest_data)
 
 
 # MOST POPULAR OLAs RANKED converted to single vector without n
 ranked_act <- c(mode_activity$activity_type)
-
 
 
 # PLOT SECTION
@@ -170,7 +170,7 @@ img {
 
 Since COVID-19 drove mankind into social & physical isolation, the world just hasn't been the same. We witnessed massive, sweeping declines in the physical, and mental well-being of populations across the globe. Then, meteoric rises in the rates of depression, and anti-social behaviours of our most vulnerable, made us painfully aware of the irreplaceable value of real, physical, human interaction. But now, with the dawn of Artificial Intelligence, many people are finding themselves struggling once again to pry themselves from their screen-addictions - even when they want to. But, not all hope is lost! Recent observations argue that individual and collective autonomy still lives! 
 
-In what could be called a <i> 'corrective turn' </i> toward offline life, emerging trends indicate growing sentiment in the desire to <i>"quit social media"</i> and re-connect with the physical world. Take for example the explosions in popularity of hobbies like running, bouldering, plant collection, dancing, matcha making, and paperback reading to name a few. A recent cultural icon embodies these cultural shifts well: the phenomenon of the <i>"performative man"</i> archetype... 
+In what could be called a <i>'corrective turn'</i> toward offline life, emerging trends indicate growing sentiment in the desire to <i>"quit social media"</i> and re-connect with the physical world. Take for example the explosions in popularity of hobbies like running, bouldering, plant collection, dancing, matcha making, and paperback reading to name a few. A recent cultural icon embodies these cultural shifts well: the phenomenon of the <i>"performative man"</i> archetype... 
 
 <img src="How-to-identify-performative-male.jpg" alt="An infographic reading, &quot;How to identify a performative man&quot;, alongside a picture of a man in vintage 'preppy' clothes, wired headphones, a physical book on &quot;feminist&quot; literature in one hand, and a mug of matcha in his other hand." style="width: 500px; height: auto; border: 3px solid black;">
 
@@ -223,8 +223,8 @@ ranked_act <- c(mode_activity$activity_type)
 ## Dynamic Report
 
 <div class="section-border">
-Link to GitHub Pages published dynamic report:
-[](https://)
+Link to my GitHub Pages published dynamic report:
+[Gabriel's GitHub Pages/stats220 public repository](https://github.com/jgrn716/stats220)
 </div>
 
 <div class="section-border">
