@@ -170,11 +170,11 @@ img {
 
 Since COVID-19 drove mankind into social & physical isolation, the world just hasn't been the same. We witnessed massive, sweeping declines in the physical, and mental well-being of populations across the globe. Then, meteoric rises in the rates of depression, and anti-social behaviours of our most vulnerable, made us painfully aware of the irreplaceable value of real, physical, human interaction. But now, with the dawn of Artificial Intelligence, many people are finding themselves struggling once again to pry themselves from their screen-addictions - even when they want to. But, not all hope is lost! Recent observations argue that individual and collective autonomy still lives! 
 
-In what could be called a *'corrective turn'* toward offline life, emerging trends indicate growing sentiment in the desire to *"quit social media"* and re-connect with the physical world. Take for example the explosions in popularity of hobbies like running, bouldering, plant collection, dancing, matcha making, and paperback reading to name a few. A recent cultural icon embodies these cultural shifts well: the phenomenon of the *"performative man"* archetype... 
+In what could be called a <i>'corrective turn'</i> toward offline life, emerging trends indicate growing sentiment in the desire to <i>"quit social media"</i> and re-connect with the physical world. Take for example the explosions in popularity of hobbies like running, bouldering, plant collection, dancing, matcha making, and paperback reading to name a few. A recent cultural icon embodies these cultural shifts well: the phenomenon of the <i>"performative man"</i> archetype... 
 
-<img src="How-to-identify-performative-male.jpg" alt="An infographic reading, &quot;How to identify a performative man&quot;, alongside a picture of a man in vintage 'preppy' clothes, wired headphones, a physical book on &quot;feminist&quot; literature in one hand, and a mug of matcha in his other hand." style="width: 500px; height: auto; border: 3px solid black;">
+<img src="https://cdn.wou.edu/westernhowl/files/2026/01/IMG_9122.jpg" alt="An infographic reading, &quot;How to identify a performative man&quot;, alongside a picture of a man in vintage 'preppy' clothes, wired headphones, a physical book on &quot;feminist&quot; literature in one hand, and a mug of matcha in his other hand." style="width: 500px; height: auto; border: 3px solid black;">
 
-Importantly, the current body of peer-reviewed academic research seems to support these shifts. Studies suggest that offline leisure activities, such as the earlier, provide greater correlative benefits to our well-being than online/screen-reliant alternatives. But, how are Kiwis positioned in all this? They say that *"actions speak louder than words"*; so, what do our (Kiwi/New Zealander) behaviours say about our offline engagement?
+Importantly, the current body of peer-reviewed academic research seems to support these shifts. Studies suggest that offline leisure activities, such as the earlier, provide greater correlative benefits to our well-being than online/screen-reliant alternatives. But, how are Kiwis positioned in all this? They say that <i>"actions speak louder than words"</i>; so, what do our (Kiwi/New Zealander) behaviours say about our offline engagement?
 <br><br><br>
 </div>
 
@@ -188,8 +188,8 @@ This report will investigate the offline leisure activity (OLA) habits of Kiwis,
 <div class="section-border">
 ### Guidelines:
 
-In the design of my data collection methods, particular attention was paid to *"Guideline 4: Use validation rules for responses"*. Proper adherance to this guideline allows for the collection of *"clean"* data, such that bugs and error codes can be avoided due to the presence of invalid, *"NA"* (Not Available) values in the data gathered. Clean data thereby gives way to a more seamless process in the visualisation and analysis of data to gather valid, valuable insights. Response validation guidelines were utlisied by requiring that all questions in the survey are answered by the respondent in order to submit a response, and by requiring a numeric short answer response (between values of 0 and 1440) to "Question 4", where the use of special characters (i.e., ".", ",", "</>", etc.) is also restricted to avoid floating point and NA values. The value restriction (between 0 and 1440) additionally allows for a full spectrum of possible responses - for individuals that do not engage in OLA at all, as well as the impractical (but theoretically applicable) possibility of engaging in 24 hours of OLA engagement in a single day. 
-Unfortunately, whilst response validation helps in gathering clean data, it also risks bias in the responses, and harm to respondents. For example, the presence and wording of the question risks that respondents may feel pressured to input an inaccurate value, to please the researcher and/or align themselves with perceived social norms (i.e., social desirability bias). Unfortunately, due to time constraints, I was unable to launch a pilot survey and failed to recognise that my wording in question 4 presumes that the respondent ***does*** engage in OLA at all: <br>
+In the design of my data collection methods, particular attention was paid to <i>"Guideline 4: Use validation rules for responses"</i>. Proper adherance to this guideline allows for the collection of <i>"clean"</i> data, such that bugs and error codes can be avoided due to the presence of invalid, <i>"NA"</i> (Not Available) values in the data gathered. Clean data thereby gives way to a more seamless process in the visualisation and analysis of data to gather valid, valuable insights. Response validation guidelines were utlisied by requiring that all questions in the survey are answered by the respondent in order to submit a response, and by requiring a numeric short answer response (between values of 0 and 1440) to "Question 4", where the use of special characters (i.e., ".", ",", "</>", etc.) is also restricted to avoid floating point and NA values. The value restriction (between 0 and 1440) additionally allows for a full spectrum of possible responses - for individuals that do not engage in OLA at all, as well as the impractical (but theoretically applicable) possibility of engaging in 24 hours of OLA engagement in a single day. 
+Unfortunately, whilst response validation helps in gathering clean data, it also risks bias in the responses, and harm to respondents. For example, the presence and wording of the question risks that respondents may feel pressured to input an inaccurate value, to please the researcher and/or align themselves with perceived social norms (i.e., social desirability bias). Unfortunately, due to time constraints, I was unable to launch a pilot survey and failed to recognise that my wording in question 4 presumes that the respondent <b><i>does</i></b> engage in OLA at all: <br>
 
 <img src="Question-4-screenshot.png" alt="A screenshot of a question in the survey that reads: %quot;4. On average, how many minutes per day do you spend on offline leisure activities outside of work/school?
 (Please do not include special characters and punctuation.)&quot;" style="width: 500px; height: auto;">
@@ -201,13 +201,13 @@ Unfortunately, whilst response validation helps in gathering clean data, it also
 
 In analysing the data collected for this project, I learned the following valuble lessons:<br>
 
-1. It is very difficult, if not impossible, to design an entirely *foolproof* survey that completely escapes bias (from either the researchers', or the researchees' end) and simultaenously allows for the collection of *"clean and tidy"* data. To some degree, we have to welcome the existence of bias and use it to lean into the inherent contextual nature of a given sample size (of a population).
+1. It is very difficult, if not impossible, to design an entirely <i>foolproof</i> survey that completely escapes bias (from either the researchers', or the researchees' end) and simultaenously allows for the collection of <i>"clean and tidy"</i> data. To some degree, we have to welcome the existence of bias and use it to lean into the inherent contextual nature of a given sample size (of a population).
 
 2. There is a fine balance in narrowing the options provided in closed answer questions to achieve specificity/accuracy, and accounting for the wide spectrum of possible experiences.
 
-3. A great wealth of insight can be synthesized from even a *small* subset of data (i.e., responses from a 6-question survey), to generate inummerable hypotheses. In other words, even studies with small populations can be useful for research so long as we are aware of, and communicate the limit to generalisability well.
+3. A great wealth of insight can be synthesized from even a <i>small</i> subset of data (i.e., responses from a 6-question survey), to generate inummerable hypotheses. In other words, even studies with small populations can be useful for research so long as we are aware of, and communicate the limit to generalisability well.
 
-**Note:** *Both the form designed and data collection for this project were completed by me.* \newline
+<b>Note:</b> <i>Both the form designed and data collection for this project were completed by me.</i> \newline
 <br><br><br>
 </div> 
 
@@ -229,17 +229,17 @@ Link to my GitHub Pages published dynamic report:
 
 <div class="section-border">
 ### Interesting Insights: 
-***How Much Time Does the Average Kiwi Spend on OLAs?***
+<b><i>How Much Time Does the Average Kiwi Spend on OLAs?</i></b>
 
-Amongst the `r population` respondents, the average (*median*) time spent per week on OLA was `r median_time_spent` minutes; or `r median_time_spent/60` hours. This means that the average Kiwi, according to my small sample, typically spends `r med_min` minutes; or `r med_min/60` hours on a given day that they engage in offline leisure activities. 
+Amongst the `r population` respondents, the average (<i>median</i>) time spent per week on OLA was `r median_time_spent` minutes; or `r median_time_spent/60` hours. This means that the average Kiwi, according to my small sample, typically spends `r med_min` minutes; or `r med_min/60` hours on a given day that they engage in offline leisure activities. 
 
 ![An animated image of a popular character, "Crayon Shin-chan", dancing.](https://tenor.com/en-NZ/view/shinchan-dance-shinchan-짱구-짱구춤-dance-gif-25219440.gif) 
 <br><br><br>
 
 
-***Top Five OLA Hobbies:***
+<b><i>Top Five OLA Hobbies:</i></b>
 
-According to my survey, the *top five* OLA hobbies amongst Kiwis are: <br>
+According to my survey, the <i>top five</i> OLA hobbies amongst Kiwis are: <br>
 1. `r c(ranked_act[1])` <br>
 2. `r c(ranked_act[2])` <br>
 3. `r c(ranked_act[3])` <br>
@@ -266,7 +266,7 @@ ggplot(employment_summary, aes(x = employment_status,
        y = "Median Weekly OLA Time (minutes)",
        caption = "Source: Offline Leisure Activity Habits of New Zealanders: A Survey")
 ```
-*Results:* Respondents who selected for the "Game developer, casual warehouse assistant", and "Part-time employed" statuses engaged in OLAs significantly more than their peers (i.e., "Full-time employed", "Unemployed", and "Freelancer"). It is important to consider that, due to the small sample size (*n* = 20), there is a very assymmetric distribution of employment statuses skewingly strongly towards "Full-time employed" responses. Additionally, significant time constraints for this project resulted in a very short interval between data collection and analysis. This provides the added risk of bias in the types of individuals who responded to the survey.
+<i>Results:</i> Respondents who selected for the "Game developer, casual warehouse assistant", and "Part-time employed" statuses engaged in OLAs significantly more than their peers (i.e., "Full-time employed", "Unemployed", and "Freelancer"). It is important to consider that, due to the small sample size (<i>n</i> = 20), there is a very assymmetric distribution of employment statuses skewingly strongly towards "Full-time employed" responses. Additionally, significant time constraints for this project resulted in a very short interval between data collection and analysis. This provides the added risk of bias in the types of individuals who responded to the survey.
 <br><br><br>
 
 
@@ -281,7 +281,7 @@ ggplot(latest_data) +
        y = "Weekly OLA Time (minutes)",
        caption = "Source: Offline Leisure Activity Habits of New Zealanders: A Survey")
 ```
-*Results:* Urgency rating responses appear to cluster around the values of "3" and "4", out of the 5-point scale. This indicates that most Kiwis (from this population), feel moderate to moderately-high levels of urgency when engaging in OLAs. If these effects do extend to wider populations, it is of interest whether the current geopolitical, and socioeconomic climate contributed to these results, versus modern cultural shifts in lifestyle pressures, versus a combination of both - or an entirely other factor. Additionally, not accounting for outliers, there appears to be a generally inversely proportional correlation between weekly OLA time and urgency rating. That is, the higher the respondents rated their feelings of urgency - whilst engaging in OLAs - the less time they engaged in OLAs throughout the week. Once again, it is important to consider that due to the small sample size and asymmetric distribution of employment status responses, this correlative relationship seems to disappear. 
+<i>Results:</i> Urgency rating responses appear to cluster around the values of "3" and "4", out of the 5-point scale. This indicates that most Kiwis (from this population), feel moderate to moderately-high levels of urgency when engaging in OLAs. If these effects do extend to wider populations, it is of interest whether the current geopolitical, and socioeconomic climate contributed to these results, versus modern cultural shifts in lifestyle pressures, versus a combination of both - or an entirely other factor. Additionally, not accounting for outliers, there appears to be a generally inversely proportional correlation between weekly OLA time and urgency rating. That is, the higher the respondents rated their feelings of urgency - whilst engaging in OLAs - the less time they engaged in OLAs throughout the week. Once again, it is important to consider that due to the small sample size and asymmetric distribution of employment status responses, this correlative relationship seems to disappear. 
 <br><br><br>
 
 
@@ -303,7 +303,7 @@ ggplot(urgency_count_summary) +
        y = "Count of Responses",
        caption = "Offline Leisure Activity Habits of New Zealanders: A Survey")
 ```
-*Results:* Interestingly, respondents who classified themselves as either "Full-time employed" or "Part-time employed" are the most well-distributed across urgency rating response-bands. On the other hand, the urgency ratings of the respondents classified as "Freelancer" and "Game developer, casual warehouse assistant" are congruent with the prior result indicating an average tendency to score between "3" and "4" for urgency ratings. Meanwhile, the respondent classified as "Unemployed" selected for the lowest urgency rating (i.e., "1").  These results of the latter three cohorts however, have limited power and generalisability as all three belonged to a sample size of *n* = 1 each. Being that the "Full-time employed" and "Part-time employed" cohorts were the largest contributes to the sample size of this study,it would be inappropriate to discuss their effect on this pattern. 
+<i>Results:</i> Interestingly, respondents who classified themselves as either "Full-time employed" or "Part-time employed" are the most well-distributed across urgency rating response-bands. On the other hand, the urgency ratings of the respondents classified as "Freelancer" and "Game developer, casual warehouse assistant" are congruent with the prior result indicating an average tendency to score between "3" and "4" for urgency ratings. Meanwhile, the respondent classified as "Unemployed" selected for the lowest urgency rating (i.e., "1").  These results of the latter three cohorts however, have limited power and generalisability as all three belonged to a sample size of <i>n</i> = 1 each. Being that the "Full-time employed" and "Part-time employed" cohorts were the largest contributes to the sample size of this study,it would be inappropriate to discuss their effect on this pattern. 
 <br><br><br>
 </div> 
 
@@ -328,7 +328,7 @@ Some of the ways this project demonstrates creativity are listed in the followin
 
 7. I manipulated my data frame using the mutate function to generate numerical calculations between two different classes of data values (numeric and character strings). Specifically I converted the response bands in my "freq_days" column to numeric estimates, and multiplied them with corresponding values in my "estimated_min" column to infer the amount of time respondents' may spend throughout a whole week (rather than per day as was recorded).
 
-8. I devised a means to rank OLAs, by response popularity, using code from a column that contained multiple values in each row (vector). I also necessarily converted these values into a uniform string format. The latter was particularly difficult when I noticed that the same OLA type (i.e., "Dancing." vs. " Dancing." was counted as different values (in their own row with their own *n* count) due to the presence of inconsistent spaces when responses were ordered chronologically by the respondents' selections.\newline
+8. I devised a means to rank OLAs, by response popularity, using code from a column that contained multiple values in each row (vector). I also necessarily converted these values into a uniform string format. The latter was particularly difficult when I noticed that the same OLA type (i.e., "Dancing." vs. " Dancing." was counted as different values (in their own row with their own <i>n</i> count) due to the presence of inconsistent spaces when responses were ordered chronologically by the respondents' selections.\newline
 <br><br><br>
 </div> 
 
@@ -336,7 +336,7 @@ Some of the ways this project demonstrates creativity are listed in the followin
 ## Learning Reflection
 
 ### 1. One important idea learned form Module 2:
-An important idea that I learned from **Module 2** was the concept of data governance through the *"FAIR"* and *CARE* principles. Of particular issue is the lesson that data can represent, and thereby impact the living experience (of human participants, and animal subjects). Additionally, I have learnt that the use of a pilot study is a great way to expose flaws in the design of my data collection and data analysis methods. The pilot study can reveal important biases, and possible ethical dilemmas concerning *"FAIR"* and *CARE* principles of data governance. It is also a great way to gather feedback on current or future study designs.
+An important idea that I learned from <b>Module 2</b> was the concept of data governance through the <i>"FAIR"</i> and <i>CARE</i> principles. Of particular issue is the lesson that data can represent, and thereby impact the living experience (of human participants, and animal subjects). Additionally, I have learnt that the use of a pilot study is a great way to expose flaws in the design of my data collection and data analysis methods. The pilot study can reveal important biases, and possible ethical dilemmas concerning <i>"FAIR"</i> and <i>CARE</i> principles of data governance. It is also a great way to gather feedback on current or future study designs.
 
 ### 2. Things related to data technologies that I want to explore further:
 I would love to further explore the creation of interactive elements such as progressive revealing infographics, for their propensity to capture human attention. The stories we explored in pudding.cool are great examples of data technologies that pique my curiosity.
