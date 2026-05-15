@@ -189,8 +189,9 @@ This report will investigate the offline leisure activity (OLA) habits of Kiwis,
 In the design of my data collection methods, particular attention was paid to *"Guideline 4: Use validation rules for responses"*. Proper adherance to this guideline allows for the collection of *"clean"* data, such that bugs and error codes can be avoided due to the presence of invalid, *"NA"* (Not Available) values in the data gathered. Clean data thereby gives way to a more seamless process in the visualisation and analysis of data to gather valid, valuable insights. Response validation guidelines were utlisied by requiring that all questions in the survey are answered by the respondent in order to submit a response, and by requiring a numeric short answer response (between values of 0 and 1440) to "Question 4", where the use of special characters (i.e., ".", ",", "</>", etc.) is also restricted to avoid floating point and NA values. The value restriction (between 0 and 1440) additionally allows for a full spectrum of possible responses - for individuals that do not engage in OLA at all, as well as the impractical (but theoretically applicable) possibility of engaging in 24 hours of OLA engagement in a single day. 
 Unfortunately, whilst response validation helps in gathering clean data, it also risks bias in the responses, and harm to respondents. For example, the presence and wording of the question risks that respondents may feel pressured to input an inaccurate value, to please the researcher and/or align themselves with perceived social norms (i.e., social desirability bias). Unfortunately, due to time constraints, I was unable to launch a pilot survey and failed to recognise that my wording in question 4 presumes that the respondent ***does*** engage in OLA at all:
 
-![A screenshot of a question in the survey that reads: "4. On average, how many minutes per day do you spend on offline leisure activities outside of work/school?
-(Please do not include special characters and punctuation.)"](Question-4-screenshot.png)
+For example: 
+Question 4. of my survey reads as the following:
+*"4. On average, how many minutes per day do you spend on offline leisure activities outside of work/school? (Please do not include special characters and punctuation.)"*
 \vspace{1cm}
  
 ### How the data collected helped me learn something from analysing it:
@@ -368,3 +369,4 @@ Going forward, I aim to develop my group work skills by making a greater effort 
 ```{r file='dynamic_report.Rmd', eval=FALSE, echo=TRUE}
 
 ```
+ 
