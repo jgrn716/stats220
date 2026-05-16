@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
 library(tidyverse)
 
 # Create data frame from the published CSV file
-logged_data <- read_csv("https://docs.google.com/spreadsheets/d/1XnHi_eyx1IGpw9_BwkHFGq2syEI-kQxuQz-HJ6U4dLM/edit?resourcekey=&gid=126025250#gid=126025250")
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSdCw6VAWohCjomqMRjgfmZs8T7Uq1Dfg6rj761s33p6x8UNFaTP-WXVEvn9983u4h3ckpSdEBn0Ayu/pub?output=csv")
 
 # Create a new data frame with renamed variables/columns
 latest_data <- logged_data %>%
@@ -20,6 +20,18 @@ latest_data <- logged_data %>%
          estimated_min = 4,
          activity_type = 5,
          urgency_rating = 6)
+
+# Modify employment_status to list non-standard responses as "Other"
+latest_data <- latest_data %>%
+  mutate(employment_status = str_remove(employment_status, "\\."),
+         employment_status = case_when(
+           str_squish(employment_status) %in% c("Full-time employed", 
+                                                "Part-time employed", 
+                                                "Student", 
+                                                "Unemployed", 
+                                                "Retired") ~ employment_status,
+           is.na(employment_status) ~ NA,  # Making sure NA values are coerced as "Other"
+           TRUE ~ "Other"))
 
 # Calculate total time on OLA (Offline Leisure Activity) per respondent my element-wise vector multiplication
 # BUT FIRST: convert categorical freq_days response bands into numerical midpoint equivalents 
@@ -146,12 +158,34 @@ p, li {
   font-weight: 300;  /* Light weight */
 }
 
+table,
+figure,
+.r-plot img{
+  border: 2px solid #000000 !important;
+  border-radius: 12px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%; !important;
+  height: auto; !important;
+}
+
 img {
   border: 3px solid #000000 !important;
   border-radius: 12px;
   display: block;
-  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.markdown-img{
+  border: 3px solid #000000 !important;
+  border-radius: 12px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 33%; !important;
+  }
 
 .section-border {
   border: 3px solid #000000 !important;
@@ -162,7 +196,7 @@ img {
 }
 
 ```
-
+::: {.section-border}
 ## Introduction
 
  
@@ -172,7 +206,7 @@ Since COVID-19 drove mankind into social & physical isolation, the world just ha
 
 In what could be called a *'corrective turn'* toward offline life, emerging trends indicate growing sentiment in the desire to *"quit social media"* and re-connect with the physical world. Take for example the explosions in popularity of hobbies like running, bouldering, plant collection, dancing, matcha making, and paperback reading to name a few. A recent cultural icon embodies these cultural shifts well: the phenomenon of the *"performative man"* archetype... 
 
-![An infographic reading, "How to identify a performative man", alongside a picture of a man in vintage 'preppy' clothes, wired headphones, a physical book on "feminist" literature in one hand, and a mug of matcha in his other hand.](https://cdn.wou.edu/westernhowl/files/2026/01/IMG_9122.jpg)
+![An infographic reading, "How to identify a performative man", alongside a picture of a man in vintage 'preppy' clothes, wired headphones, a physical book on "feminist" literature in one hand, an{d a mug of matcha in his other hand.](https://cdn.wou.edu/westernhowl/files/2026/01/IMG_9122.jpg){width=33%}
 
 Importantly, the current body of peer-reviewed academic research seems to support these shifts. Studies suggest that offline leisure activities, such as the earlier, provide greater correlative benefits to our well-being than online/screen-reliant alternatives. But, how are Kiwis positioned in all this? They say that *"actions speak louder than words"*; so, what do our (Kiwi/New Zealander) behaviours say about our offline engagement?
  \newline
@@ -209,7 +243,10 @@ In analysing the data collected for this project, I learned the following valubl
  \newline
  \newline
  \newline
-
+:::
+ 
+ 
+ 
 ```{r}
 # AVERAGE TIME SPENT ON OLAs (median to avoid outlier effects)
 med_min <- median.default(latest_data$estimated_min)
@@ -217,7 +254,7 @@ med_min <- median.default(latest_data$estimated_min)
 # MOST POPULAR OLAs RANKED converted to single vector without n
 ranked_act <- c(mode_activity$activity_type)
 ```
-
+::: {.section-border}
 ## Dynamic Report 
 
  
@@ -231,7 +268,7 @@ Link to my GitHub Pages published dynamic report:
 
 Amongst the `r population` respondents, the average (*median*) time spent per week on OLA was `r median_time_spent` minutes; or `r median_time_spent/60` hours. This means that the average Kiwi, according to my small sample, typically spends `r med_min` minutes; or `r med_min/60` hours on a given day that they engage in offline leisure activities. 
 
-![An animated image of a popular character, "Crayon Shin-chan", dancing.](https://tenor.com/en-NZ/view/shinchan-dance-shinchan-짱구-짱구춤-dance-gif-25219440.gif) 
+![An animated image of a popular character, "Crayon Shin-chan", dancing.](https://tenor.com/en-NZ/view/shinchan-dance-shinchan-짱구-짱구춤-dance-gif-25219440.gif)
  \newline
  \newline
 
@@ -248,7 +285,7 @@ According to my survey, the *top five* OLA hobbies amongst Kiwis are:
 
 ### Plotted Visualisations
  
-```{r weekly-by-status-plot, fig.width=14, fig.height=7, out.width="67%", fig.cap="Figure 1: A bar graph depicting the median amount of time (minutes) respondents spent on OLAs.", echo=FALSE}
+```{r weekly-by-status-plot, fig.height=7, fig.width=14, out.width="80%", fig.cap="Figure 1: A bar graph depicting the median amount of time (minutes) respondents spent on OLAs.", echo=FALSE}
 
 # Summarise data first for AVG weekly_min by employment_status
 employment_summary <- latest_data %>%
@@ -273,7 +310,7 @@ Results: Respondents who selected for the "Game developer, casual warehouse assi
 
 
 
-```{r weekly-by-urgency-plot, fig.width=14, fig.height=7, out.width="67%", fig.cap="Figure 2: A scatterplot depicting the distribution of raw OLA time allocation values (minutes per week), with respect to urgency rating response-bands.", echo=FALSE}
+```{r weekly-by-urgency-plot, fig.height=7, fig.width=14, out.width="80%", fig.cap="Figure 2: A scatterplot depicting the distribution of raw OLA time allocation values (minutes per week), with respect to urgency rating response-bands.", echo=FALSE}
 
 # Plot raw weekly OLA time by urgency ratings to observe correlative relationship
 ggplot(latest_data) +
@@ -293,7 +330,7 @@ Results: Urgency rating responses appear to cluster around the values of "3" and
  
  
  
-```{r urgency-by-employment-plot, fig.width=14, fig.height=7, out.width="67%", fig.cap="Figure 3: A bar graph depicting the number of responses with respect to urgency rating response-bands, for each employment status category.", echo=FALSE}
+```{r urgency-by-employment-plot, fig.height=7, fig.width=14, out.width="80%", fig.cap="Figure 3: A bar graph depicting the number of responses with respect to urgency rating response-bands, for each employment status category.", echo=FALSE}
 
 # Summarise data first to create one bar per urgency rating
 urgency_count_summary <- latest_data %>%
@@ -318,9 +355,11 @@ Results: Interestingly, respondents who classified themselves as either "Full-ti
  \newline  
  \newline  
  \newline  
+:::
  
  
  
+::: {.section-border}
 ## Creativity
 
  
@@ -345,9 +384,11 @@ Some of the ways this project demonstrates creativity are listed in the followin
  \newline  
  \newline  
  \newline  
+::: 
  
  
  
+::: {.section-border}
 ## Learning Reflection
 
 ### 1. One important idea learned form Module 2:
@@ -362,9 +403,11 @@ Going forward, I aim to develop my group work skills by making a greater effort 
  \newline  
  \newline  
  \newline  
+::: 
  
  
  
+::: {.section-border} 
 ## Appendix
 
  
@@ -374,4 +417,4 @@ Going forward, I aim to develop my group work skills by making a greater effort 
 ```{r file='dynamic_report.Rmd', eval=FALSE, echo=TRUE}
 
 ```
- 
+::: 
