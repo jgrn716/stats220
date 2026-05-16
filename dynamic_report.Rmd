@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
 library(tidyverse)
 
 # Create data frame from the published CSV file
-logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSdCw6VAWohCjomqMRjgfmZs8T7Uq1Dfg6rj761s33p6x8UNFaTP-WXVEvn9983u4h3ckpSdEBn0Ayu/pub?gid=126025250&single=true&output=csv")
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/1XnHi_eyx1IGpw9_BwkHFGq2syEI-kQxuQz-HJ6U4dLM/edit?resourcekey=&gid=126025250#gid=126025250")
 
 # Create a new data frame with renamed variables/columns
 latest_data <- logged_data %>%
